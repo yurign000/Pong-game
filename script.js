@@ -2,9 +2,9 @@ var player,cpu,ball;     //OBJETOS DE CLASSE
 var canvas,ctx,pontuacao //ELEMENTOS HTML
 const windowWidth = window.innerWidth;
 const windowHeight = window.innerHeight;
+var level = 1;
 
 var game;
-
 
 //AO CARREGAR BODY
 function load(){
@@ -14,11 +14,9 @@ function load(){
     
     resizeCanvas();
 
-    player = new Player(canvas,ctx,15,150,4,'#00a','#00f');
-    cpu = new Cpu(canvas,ctx,15,150,4,1,'#a00','#f00');
+    player = new Player(canvas,ctx,15,100,4,'#00a','#00f');
+    cpu = new Cpu(canvas,ctx,15,100,4,1,'#a00','#f00');
     ball = new Ball(canvas,ctx,player,cpu,win,16,6,'#770','#dd0');
-
-    console.log(cpu.startPoint)
 
     player.setKeyEvents(document.addEventListener)
 
@@ -39,7 +37,7 @@ function commandPlayer(){
 }
 function commandCpu(){
     cpu.draw();
-    cpu.pursuitBall(ball);
+    cpu.detectBall(ball);
     cpu.move();
 }
 function commandBall(){
@@ -48,22 +46,21 @@ function commandBall(){
 }
 function win(winner){
     if(winner == 'player'){
-        player.points++;
         ball.direction.right = true;
         ball.direction.left = false;
     }
     else if(winner == 'cpu'){
-        cpu.points++
         ball.direction.left = true;
         ball.direction.right = false;
     }
     reset(winner)
 }  
 function reset(winner){
-    if(player.points < 10 && winner == 'player'){
-        if((player+1)%2 == 0) cpu.inteligence++;
-        ball.initialSpeedX += 0.8
-        pontuacao.innerHTML = 'Nivel: '+(Number(player.points) + 1)
+    if(level < 6 && winner == 'player'){
+        level++
+        cpu.inteligence++;
+        ball.initialSpeedX += 1
+        pontuacao.innerHTML = 'Nivel: '+level
     }
     ball.reset(winner,2);
 

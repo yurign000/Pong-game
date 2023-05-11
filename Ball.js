@@ -60,9 +60,6 @@ class Ball{
         }
         else if(this.x+this.ray > this.canvas.width){
             this.win('player')
-            this.win('player')
-            this.win('player')
-            this.win('player')
             this.direction.left = true;
             this.direction.right = false;
         }

@@ -17,7 +17,6 @@ class Cpu{
             down: false,
         };
         this.startPoint = this.y;
-
     }
     draw(){
         this.collision();
@@ -29,26 +28,33 @@ class Cpu{
         this.ctx.strokeRect(this.x,this.y,this.width,this.height);
         this.ctx.closePath();
     }
-    pursuitBall(ball){
-        console.log(((this.height/2)*(this.inteligence/10)))
-        if(ball.x > this.canvas.width/2 && ball.direction.right){
-            if((this.y + this.height/2) + ((this.height/2)*(this.inteligence/10)) < ball.y){
-                this.direction.down = true;
-                this.direction.up = false;
-            }
-            else if((this.y + this.height/2) - ((this.height/2)*(this.inteligence/10)) > ball.y){
-                this.direction.up = true;
-                this.direction.down = false;
-            }
-            
-            let turboArea = (this.canvas.width/2) + (this.canvas.width/2)/(this.inteligence*1.1);
-            if(ball.x > turboArea && ball.direction.right){
-                this.speed = this.initialSpeed*2;
-            }
 
-            else this.speed = this.initialSpeed;
+    detectBall(ball){
+        if(ball.x > this.canvas.width/2 && ball.direction.right)
+            this.pursuitBall(ball);
+        else{
+            this.speed = this.initialSpeed;
+            this.returnToStartPoint();
         }
-        else this.returnToStartPoint();
+    }
+    pursuitBall(ball){
+        this.center = this.y + this.height/2;
+        this.half = this.height/2;
+        this.turboArea = (this.canvas.width) - ((this.canvas.width/2)*(this.inteligence/10))
+        console.log(this.turboArea)
+
+        if(this.center + ((this.half)*(this.inteligence/10)) < ball.y){
+            this.direction.down = true;
+            this.direction.up = false;
+        }
+        else if(this.center - ((this.half)*(this.inteligence/10)) > ball.y){
+            this.direction.up = true;
+            this.direction.down = false;
+        }
+
+        if(ball.x > this.turboArea){
+            this.speed = this.initialSpeed*2;
+        }
     }
     returnToStartPoint(){
         if(this.y > this.startPoint+this.speed){
