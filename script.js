@@ -56,7 +56,7 @@ function win(winner){
     reset(winner)
 }  
 function reset(winner){
-    if(level < 6 && winner == 'player'){
+    if(level < 5 && winner == 'player'){
         level++
         cpu.inteligence++;
         ball.initialSpeedX += 1
