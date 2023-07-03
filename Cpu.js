@@ -41,7 +41,6 @@ class Cpu{
         this.center = this.y + this.height/2;
         this.half = this.height/2;
         this.turboArea = (this.canvas.width) - ((this.canvas.width/2)*(this.inteligence/10))
-        console.log(this.turboArea)
 
         if(this.center + ((this.half)*(this.inteligence/10)) < ball.y){
             this.direction.down = true;

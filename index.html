@@ -2,14 +2,30 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <!-- Microsoft apps -->
+    <meta name="msapplication-TileImage" content="https://lawex.online/og-image.png">
+    
+    <!-- Facebook, whatsapp... -->
+    <meta property="og:site_name" content="Pong Game">
+    <meta property="og:title" content="Pong">
+    <meta property="og:description" content="Jogo de pong">
+
+    <!-- Image -->
+    <meta property="og:image" itemprop="image" content="https://lawex.online/og-image.png">
+
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta property="og:url" content="https://lawex.online">
+
     <title>Pong</title>
-    <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js"></script>
     <script src="Player.js"></script>
     <script src="Cpu.js"></script>
     <script src="Ball.js"></script>
 </head>
+
 <body onload="load()">
     <div id="pontuacao">Nivel 1</div>
     <canvas>
